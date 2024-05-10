@@ -29,3 +29,5 @@ Save the result concateneted aligment which will be used for phylogenetic tree r
 It is also encourage to move the concatenated aligment to and individual folder in this case called "Tree"
 
 > iqtree2 -s Tree/Concatenate_All_sevenGenes.fasta -B 1000 -alrt 1000
+
+Finally, speciation test (bPTP and ASAP) were conducted with windowns executables 
