@@ -6,3 +6,12 @@ datasets download genome accession GCA_000163455.1 GCA_000215745.1 GCA_000281755
 
 #unzip the file
 unzip ncbi_dataset.zip
+
+# copy genome files to current working folder 
+find . -name *.fna -exec cp {} . \;
+
+# Annotated genomes 
+for file in *.fna; do
+    base_name=$(echo "$file" | cut -c 1-15)
+    prokka --cpus 15 --outdir "$base_name" --addgenes --prefix $base_name $file
+done 
