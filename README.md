@@ -7,9 +7,12 @@ Requiere:
 Obtain current complet current path directory in linux OS with
 
 >pwd
->/your/current/directory
 
 for example /your/current/directory
 
-First.
+Then, execute the script Preprocess_genomes.sh 
+
+> Preprocess_genomes.sh /your/current/directory
+
+It will download all genomes used in the current MLST
 
