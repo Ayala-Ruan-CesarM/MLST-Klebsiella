@@ -6,7 +6,8 @@ Requiere:
 
 Obtain current complet current path directory in linux OS with
 
-pwd command
+>pwd
+>/your/current/directory
 
 for example /your/current/directory
 
