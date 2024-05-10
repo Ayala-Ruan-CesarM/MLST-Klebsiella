@@ -5,6 +5,10 @@ Code used for a MLST for Klebsiella proyect in colaboration with Paredes-Amaya C
 Requiere:
 
 Obtain current complet current path directory in linux OS with
-pwd
+
+pwd command
+
 for example /your/current/directory
+
 First.
+
