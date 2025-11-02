@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#Gene resistance prediction on Klebsiella with abricate 
+list=("argannot" "ecoh" "plasmidfinder" "ecoli_vf" "card" "resfinder" "ncbi" "megares" "vfdb" )
+output_file="Klebsiella_all_"
+input="*.fna"
+for item in "${list[@]}" ; do 
+    abricate --threads 20 --nopath --db $item $input > "${output_file}${item}".tsv
+done
+
+# Concatenate output and clean the file, no double headers
+cat *.tsv > Klebsiella_all_dbs.tab
+awk '/^#FILE/ && count++ > 0 {next} 1' Klebsiella_all_dbs.tab > Klebsiella_all_dbs_clean.tab
+
+# Python script to remove duplicate gene annotations 
+
+python Remove_duplicates.py -i Klebsiella_all_dbs_clean.tab -o Klebsiella_all_dbs_clean_No_duplicates.tab
