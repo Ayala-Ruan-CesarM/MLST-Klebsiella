@@ -14,4 +14,8 @@ awk '/^#FILE/ && count++ > 0 {next} 1' Klebsiella_all_dbs.tab > Klebsiella_all_d
 
 # Python script to remove duplicate gene annotations 
 
-python Remove_duplicates.py -i Klebsiella_all_dbs_clean.tab -o Klebsiella_all_dbs_clean_No_duplicates.tab
+python Remove_duplicates_v2.py -i Klebsiella_all_dbs_clean.tab -o Klebsiella_all_dbs_clean_No_duplicates.tab
+
+sed -i 's/(bla)//g' Klebsiella_all_dbs_clean_No_duplicates.tab
+
+abricate --summary Klebsiella_all_dbs_clean_No_duplicates.tab > Klebsiella_all_dbs_clean_No_duplicates.tsv 
