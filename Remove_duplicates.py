@@ -9,9 +9,10 @@ Deduplication logic:
    — chosen by highest %COVERAGE, then highest %IDENTITY.
 2. Then, within the same (GENE, SEQUENCE, STRAND), keep only the entry
    with the highest %COVERAGE and %IDENTITY.
+   * GENE comparison is case-insensitive (e.g., MARA == marA).
 
 Example usage:
-    python Remove_duplicatess.py -i annotations.tsv -o annotations_deduplicated.tsv
+    python deduplicate_annotations.py -i annotations.tsv -o annotations_deduplicated.tsv
 """
 
 import pandas as pd
@@ -33,16 +34,21 @@ def load_and_deduplicate_annotations(input_file: str, output_file: str):
         by=["SEQUENCE", "START", "END", "STRAND", "%COVERAGE", "%IDENTITY"],
         ascending=[True, True, True, True, False, False]
     )
-    df_dedup = df_sorted.drop_duplicates(subset=["SEQUENCE", "START", "END", "STRAND"], keep="first")
+    df_dedup = df_sorted.drop_duplicates(subset=["SEQUENCE", "START", "END", "STRAND"], keep="first").copy()
 
     # -------------------------------
-    # Step 2: Deduplicate by gene on same SEQUENCE and STRAND
+    # Step 2: Deduplicate by gene (case-insensitive) within same SEQUENCE and STRAND
     # -------------------------------
+    df_dedup["GENE_lower"] = df_dedup["GENE"].str.lower()  # normalize case
+
     df_final_sorted = df_dedup.sort_values(
-        by=["SEQUENCE", "STRAND", "GENE", "%COVERAGE", "%IDENTITY"],
+        by=["SEQUENCE", "STRAND", "GENE_lower", "%COVERAGE", "%IDENTITY"],
         ascending=[True, True, True, False, False]
     )
-    df_final = df_final_sorted.drop_duplicates(subset=["SEQUENCE", "STRAND", "GENE"], keep="first")
+    df_final = df_final_sorted.drop_duplicates(subset=["SEQUENCE", "STRAND", "GENE_lower"], keep="first")
+
+    # Drop helper column
+    df_final = df_final.drop(columns=["GENE_lower"])
 
     # -------------------------------
     # Save the output
@@ -71,7 +77,6 @@ def main():
     )
 
     args = parser.parse_args()
-
     load_and_deduplicate_annotations(args.input, args.output)
 
 
