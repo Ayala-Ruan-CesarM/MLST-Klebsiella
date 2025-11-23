@@ -52,3 +52,5 @@ unzip ncbi_dataset.zip
 #copy genome files to current working folder 
 find . -name *.fna -exec cp {} "$PATH" \;
 ``` 
+Assuming all genomes files (type material and Colombian genomes) are on the same directory
+and that [abricate](https://github.com/tseemann/abricate.git) is installed and executable 
