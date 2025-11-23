@@ -52,5 +52,15 @@ unzip ncbi_dataset.zip
 #copy genome files to current working folder 
 find . -name *.fna -exec cp {} "$PATH" \;
 ``` 
-Assuming all genomes files (type material and Colombian genomes) are on the same directory
-and that [abricate](https://github.com/tseemann/abricate.git) is installed and executable 
+Assuming all genomes files (type material and Colombian genomes) are on the same directory,
+that [abricate](https://github.com/tseemann/abricate.git) and [ncbi datasest](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/command-line-tools/download-and-install/)is installed and executable and that "Remove_duplicates.py" is on the working dir run:
+```
+Resistance.sh
+```
+That bash command will do: 
+1) Predict resistance genes   all genomes
+2) Execute the script Remove_duplicates.py
+3) Create metadata tables from ncbi genome information
+
+Once finised, covert the json files created "Metadata_typematerial.json" and "Metadata_Col.json" to tab separeted files
+using the python script "convertjson.py" changing manually the input and output file names with the favorite text editor. 
