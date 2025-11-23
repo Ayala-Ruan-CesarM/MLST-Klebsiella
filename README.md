@@ -55,7 +55,7 @@ find . -name *.fna -exec cp {} "$PATH" \;
 Assuming all genomes files (type material and Colombian genomes) are on the same directory,
 that [abricate](https://github.com/tseemann/abricate.git) and [ncbi datasest](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/command-line-tools/download-and-install/)is installed and executable and that "Remove_duplicates.py" is on the working dir run:
 ```
-Resistance.sh
+bash Resistance.sh
 ```
 That bash command will do: 
 1) Predict resistance genes   all genomes
@@ -64,3 +64,20 @@ That bash command will do:
 
 Once finised, covert the json files created "Metadata_typematerial.json" and "Metadata_Col.json" to tab separeted files
 using the python script "convertjson.py" changing manually the input and output file names with the favorite text editor. 
+
+As mentioned in the methods secction the output file from abricate "Klebsiella_all_dbs_clean_No_duplicates.tsv" went over manual revision before plotting
+and data from "KP" isolations were added to the final data. 
+
+# Plots generation 
+
+You will need to have the "NEW_Anex_2.txt" table from article supplementary data then run:
+```
+python heatmap.py
+```
+Manually one could change rows or columns clustering changing one of the following options to True from the 
+sns.clustermap plot funciton
+```
+col_cluster=False
+row_cluster=False
+```
+
