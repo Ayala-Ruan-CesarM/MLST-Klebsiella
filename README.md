@@ -32,7 +32,7 @@ It is also encourage to move the concatenated aligment to and individual folder 
 
 ``` 
 iqtree2 -s Tree/Concatenate_All_sevenGenes.fasta -B 1000 -alrt 1000
-
+```
 
 #Resitance gene search
 
