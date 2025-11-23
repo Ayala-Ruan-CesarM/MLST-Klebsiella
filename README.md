@@ -33,5 +33,21 @@ It is also encourage to move the concatenated aligment to and individual folder 
 ``` 
 iqtree2 -s Tree/Concatenate_All_sevenGenes.fasta -B 1000 -alrt 1000
 
+
+#Resitance gene search
+
+First will need to downdload the genomes for K. variicola and quasipneumonaie found in Colombia (see methods article)
+
+``` 
+datasets download genome accession GCA_002119865.1 GCA_002851415.1 GCA_002851635.1 GCA_018208605.1 GCA_013169455.1 GCA_002854775.1 \
+GCA_002855225.1 GCA_002853615.1 GCA_002853635.1 GCA_002853675.1 GCA_002853695.1 GCA_002853875.1 GCA_002851315.1 GCA_002851595.1 \
+GCA_002855355.1 GCA_002855425.1 GCA_002855095.1 GCA_002853745.1 GCA_002851075.1 GCA_002851085.1 GCA_002851235.1 GCA_002851295.1 \
+GCA_002854595.1 GCA_002854795.1 GCA_002854535.1 GCA_013169665.1 GCA_013169715.1 GCA_013169755.1 GCA_002119945.1 
+```
+#unzip the file
+unzip ncbi_dataset.zip
+
+# copy genome files to current working folder 
+find . -name *.fna -exec cp {} "$PATH" \;
 ``` 
 Finally, speciation test (bPTP and ASAP) were conducted with windowns executables 
